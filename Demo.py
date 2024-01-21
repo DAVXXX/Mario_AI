@@ -2,9 +2,14 @@ import gym_super_mario_bros
 from gym_super_mario_bros.actions import RIGHT_ONLY
 from nes_py.wrappers import JoypadSpace
 from wrappers import apply_wrappers
+import time
 
 from agent import Agent
 import os
+
+# Frame rate settings
+fps = 30
+frame_duration = 1.0 / fps  # Duration of each frame in seconds
 
 # Static model path
 model_path = "C:\Super-Mario-Bros-RL\models"
@@ -39,9 +44,16 @@ try:
         state, _ = env.reset()
         done = False
         while not done:
+            start_time = time.time()  # Record start time of the frame
+
             action = agent.choose_action(state)
             state, reward, done, truncated, info = env.step(action)
-            # No training or updating the agent
+
+            # Calculate elapsed time and sleep if necessary
+            elapsed = time.time() - start_time
+            if elapsed < frame_duration:
+                time.sleep(frame_duration - elapsed)
+
 except KeyboardInterrupt:
     print("Exiting the demo...")
     env.close()
