@@ -63,12 +63,18 @@ pip install -r requirements.txt
 ****DEBUGGING  &  When completed training******
 
 
-****Clean up Conda: remove any cached files that might be causing issues.
+****Clean up Conda: remove any cached files that might be causing issues:
+
 conda clean --all
 
 
 ****First Run to deactivate the Env:
+
+
 conda deactivate
 
-****Removes the existing env 
+
+****Removes the existing Env: 
+
+
 conda env remove --name smbrl
