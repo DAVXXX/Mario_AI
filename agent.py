@@ -85,6 +85,12 @@ class Agent:
         torch.save(state, path)
 
     def load_model(self, path):
+        """
+        Loads a model state from the specified file into the agent.
+        :param path: Path to the model file.
+        """
+        state = torch.load(path)
+        self.online_network.load_state_dict(state["model_state"])
         state = torch.load(path)
         self.online_network.load_state_dict(state["model_state"])
 
@@ -125,8 +131,3 @@ class Agent:
 
         self.learn_step_counter += 1
         self.decay_epsilon()
-
-
-        
-
-
